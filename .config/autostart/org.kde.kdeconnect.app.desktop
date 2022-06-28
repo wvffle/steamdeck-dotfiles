@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Qt;KDE;Network
+Comment[pl_PL]=Uczyń wszystkie swoje urządzenia jednym
+Comment=Make all your devices one
+Exec=/usr/bin/flatpak run --branch=master --arch=x86_64 --command=kdeconnect-app org.kde.kdeconnect
+GenericName[pl_PL]=Synchronizacja urządzenia
+GenericName=Device Synchronization
+Icon=kdeconnect
+Name[pl_PL]=KDE Connect
+Name=KDE Connect
+Terminal=false
+Type=Application
+X-Flatpak=org.kde.kdeconnect
+X-Flatpak-Tags=nightly;

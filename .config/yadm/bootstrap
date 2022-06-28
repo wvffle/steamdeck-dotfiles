@@ -5,4 +5,5 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 flatpak install --noninteractive --or-update \
 	com.github.tchx84.Flatseal \
+	org.kde.kdeconnect \
 	io.neovim.nvim
