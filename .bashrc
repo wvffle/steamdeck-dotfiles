@@ -157,3 +157,5 @@ __steamos_ps1 '(\[\033[1;32m\]\u@\h\[\033[1;34m\] \W\[\033[0m\])\$ '
 PROMPT_COMMAND="__steamos_prompt_command '$PS1'${PROMPT_COMMAND:+; $PROMPT_COMMAND; }"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+alias nvim='flatpak run io.neovim.nvim -p'
