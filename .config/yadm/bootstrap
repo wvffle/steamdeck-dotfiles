@@ -1,9 +1,19 @@
 #!/bin/bash
 
+echo "Installing fzf"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all --no-zsh --no-fish
 
+echo "Installing flatpaks"
 flatpak install --noninteractive --or-update \
 	com.github.tchx84.Flatseal \
 	org.kde.kdeconnect \
 	io.neovim.nvim
+
+echo "Using sudo to add user '$USER' to input group"
+sudo gpasswd -a $USER input
+
+echo "Init submodules"
+yadm submodule update --recursive --init
+
+

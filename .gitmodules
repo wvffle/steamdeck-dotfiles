@@ -1,0 +1,3 @@
+[submodule ".local/share/autorandr"]
+	path = .local/share/autorandr
+	url = git@github.com:phillipberndt/autorandr.git
