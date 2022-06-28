@@ -1,0 +1,12 @@
+[Unit]
+AssertPathExists=%h
+
+[Service]
+PrivateTmp=true
+WorkingDirectory=/tmp
+NoNewPrivileges=true
+Restart=always
+ExecStart="%h/.local/bin/nm-hooks.sh"
+
+[Install]
+WantedBy=default.target
