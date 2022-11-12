@@ -1,0 +1,24 @@
+#!/bin/bash
+
+[[ "$EUID" -ne 0 ]] && {
+  echo "Please run as root"
+  exit
+}
+
+# Package list separated by space
+packages="pipewire-zeroconf"
+
+echo "Disabling the read-only lock on the file system."
+sudo steamos-readonly disable
+
+echo "Initializing the pacman keyring."
+sudo pacman-key --init
+
+echo "Populating the pacman keyring with default Arch Linux keys"
+sudo pacman-key --populate archlinux
+
+echo "Installing packages"
+sudo pacman --noconfirm -Sy ${packages}
+
+echo "Enabling the read-only lock on the file system."
+sudo steamos-readonly enable
