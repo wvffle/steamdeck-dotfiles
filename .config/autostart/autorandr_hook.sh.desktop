@@ -1,7 +1,0 @@
-[Desktop Entry]
-Exec=/home/deck/.local/bin/autorandr_hook.sh
-Icon=dialog-scripts
-Name=autorandr_hook.sh
-Path=
-Type=Application
-X-KDE-AutostartScript=true
