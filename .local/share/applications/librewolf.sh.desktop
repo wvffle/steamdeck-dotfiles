@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/home/deck/.local/bin/librewolf.sh %u
+MimeType=x-scheme-handler/http;
+Name=librewolf.sh
+NoDisplay=true
+Type=Application
