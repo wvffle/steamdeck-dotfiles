@@ -15,7 +15,7 @@ flatpak override --user --filesystem=/run/user/1000/podman/podman.sock
 echo "Installing distrobox"
 curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh -s -- --prefix ~/.local
 
-# Distrobox workaround for https://github.com/89luca89/distrobox/issues/463
+echo "Using sudo to work around https://github.com/89luca89/distrobox/issues/463"
 cat <<EOF | sudo tee /etc/profile
 
 # Add local bin to PATH
@@ -28,6 +28,9 @@ if test -d \$HOME/.local/podman; then
     export PATH=\$HOME/.local/podman/bin:\$PATH
 fi
 EOF
+
+echo "Installing nvm"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 echo "Using sudo to add user '$USER' to input group"
 sudo gpasswd -a $USER input

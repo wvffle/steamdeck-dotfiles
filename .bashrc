@@ -14,8 +14,6 @@
 # ~/.bashrc
 #
 
-export PATH=$PATH:~/.local/bin
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -156,6 +154,16 @@ __steamos_prompt_command() {
 __steamos_ps1 '(\[\033[1;32m\]\u@\h\[\033[1;34m\] \W\[\033[0m\])\$ '
 PROMPT_COMMAND="__steamos_prompt_command '$PS1'${PROMPT_COMMAND:+; $PROMPT_COMMAND; }"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+xhost +si:localuser:$USER &> /dev/null
 
-alias nvim='flatpak run io.neovim.nvim -p'
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Podman inside distrobox 
+if [ -e /run/.containerenv ] || [ -e /.dockerenv ]; then
+  podman () {
+    distrobox-host-exec ~/.local/podman/bin/podman ${@:1}
+  }
+fi

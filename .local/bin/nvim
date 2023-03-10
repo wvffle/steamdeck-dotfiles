@@ -1,2 +1,2 @@
 #!/bin/bash
-$HOME/.local/bin/distrobox-enter -n workspace -- /usr/bin/nvim
+$HOME/.local/bin/distrobox-enter -n workspace -- /usr/bin/nvim $@
