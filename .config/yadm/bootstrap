@@ -2,29 +2,36 @@
 
 echo "Installing flatpaks"
 flatpak install --noninteractive --or-update \
-	com.github.tchx84.Flatseal
+	com.github.tchx84.Flatseal \
+	io.gitlab.librewolf-community \
+	io.github.NhekoReborn.Nheko \
+;
 
 echo "Installing Podman"
 curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/extras/install-podman | sh -s -- --prefix ~/.local
 systemctl --user enable podman.socket
 flatpak override --user --filesystem=/run/user/1000/podman/podman.sock
 
+echo "Installing distrobox"
+curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh -s -- --prefix ~/.local
+
+# Distrobox workaround for https://github.com/89luca89/distrobox/issues/463
+cat <<EOF | sudo tee /etc/profile
+
+# Add local bin to PATH
+if test -d \$HOME/.local/bin; then
+    export PATH=\$HOME/.local/bin:\$PATH
+fi
+
+# Add podman bin to PATH
+if test -d \$HOME/.local/podman; then
+    export PATH=\$HOME/.local/podman/bin:\$PATH
+fi
+EOF
+
 echo "Using sudo to add user '$USER' to input group"
 sudo gpasswd -a $USER input
 
 echo "Init submodules"
 yadm submodule update --recursive --init
-
-# Distrobox workaround for https://github.com/89luca89/distrobox/issues/463
-echo "For distrobox to work properly, please add the following snippet to the /etc/profile:"
-echo ""
-echo "# Add local bin to PATH"
-echo "if test -d $HOME/.local/bin; then"
-echo "    export PATH=$HOME/.local/bin:$PATH"
-echo "fi"
-echo ""
-echo "# Add podman bin to PATH"
-echo "if test -d $HOME/.local/podman; then"
-echo "    export PATH=$HOME/.local/podman/bin:$PATH"
-echo "fi"
 
